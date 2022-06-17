@@ -26,7 +26,6 @@ async function getWeatherData(location, units)
 {
     let weatherData = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=7532cb4e49752099509e49e9180a8b49`);
 
-    weatherData = await weatherData.json();
     if (weatherData.ok === false)
     {
         if (weatherData.status === 404)
@@ -35,6 +34,8 @@ async function getWeatherData(location, units)
         }
         return false;
     }
+    weatherData = await weatherData.json();
+
     weatherData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&units=metric&appid=7532cb4e49752099509e49e9180a8b49`);
     weatherData = await weatherData.json();
     return weatherData;
@@ -113,3 +114,5 @@ async function generateData(daysSeparated)
         }
     }
 }
+
+generateData(separateData(getWeatherData(location, units)));
