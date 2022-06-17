@@ -1,0 +1,23 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": [
+        "airbnb-base"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "brace-style": ["error", "allman"], //set brace style to allman
+        "no-tabs": ["error", { "allowIndentationTabs": true }], //allow tabs
+        "no-param-reassign": "off", //allow reassigning parameter's values
+        "no-plusplus": "off", //allow incrementation operators
+        "indent": ["error", 4, { "SwitchCase": 1 }], //set tab on switch's case
+        "default-case": "off", //allow not defining default case
+        "max-classes-per-file": "off", //allow multiple classes in one file
+        "no-loop-func": "off" //allows functions in loops to take references
+    }
+}

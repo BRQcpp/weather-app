@@ -1,0 +1,61 @@
+* {
+    color: inherit;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.weather-tables {
+    display: flex;
+    width: 100%;
+    height: fit-content;    
+    overflow-x: auto;
+}
+
+.date-table-container {
+    display: flex;
+    flex-shrink: 0;
+    height: 430px;
+    width: 430px;
+    flex-direction: column;
+    color: white;
+}
+
+.date-table-container > table {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-spacing: 0;
+}
+
+.date-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 40px;
+    width: 100%;
+}
+
+.date-table-container > table > tbody > tr:nth-child(2n){
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.date-table-container > table > tbody > tr > td {
+    padding: 0;
+}
+
+.date-table-container > table > tbody > tr > td:first-child {
+    padding-left: 15px;
+}
+
+.date-table-container > table > tbody > tr > td:last-child {
+    padding-right: 15px;
+}
