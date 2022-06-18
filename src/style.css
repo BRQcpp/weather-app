@@ -58,8 +58,13 @@ body {
     background-color: rgb(38 32 88);
 }
 
+.date-table-container > table > tbody > tr > th:first-child{
+    padding-left: 15px;
+}
+
 .date-table-container > table > tbody > tr > td {
     padding: 0;
+    text-align: center;
 }
 
 .date-table-container > table > tbody > tr > td:first-child {
@@ -76,6 +81,8 @@ body {
     gap: 20px;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    transition: 0.3s;
 }
 
 .input {

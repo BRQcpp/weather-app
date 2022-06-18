@@ -1,6 +1,6 @@
 import './style.css';
 
-let location = 'Warsaw';
+let location = 'London';
 let units = 'metric';
 
 document.querySelector('.submit-button-weather').addEventListener('click', () =>
@@ -10,6 +10,13 @@ document.querySelector('.submit-button-weather').addEventListener('click', () =>
 
     generateData(separateData(getWeatherData(location, units)));
 });
+
+document.querySelector('.location-input').addEventListener('click', () =>
+{
+    const input = document.querySelector('.location-input');
+    input.value = '';
+    input.style.removeProperty('color');
+}, { once: true });
 
 class dayWeatherData
 {
@@ -24,7 +31,7 @@ class dayWeatherData
 
 async function getWeatherData(location, units)
 {
-    let weatherData = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=7532cb4e49752099509e49e9180a8b49`);
+    let weatherData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=7532cb4e49752099509e49e9180a8b49`);
 
     if (weatherData.ok === false)
     {
