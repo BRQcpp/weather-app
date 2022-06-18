@@ -1,23 +1,5 @@
 import './style.css';
 
-let location = 'London';
-let units = 'metric';
-
-document.querySelector('.submit-button-weather').addEventListener('click', () =>
-{
-    location = document.querySelector('#location').value;
-    units = document.querySelector('#unit').value;
-
-    generateData(separateData(getWeatherData(location, units)));
-});
-
-document.querySelector('.location-input').addEventListener('click', () =>
-{
-    const input = document.querySelector('.location-input');
-    input.value = '';
-    input.style.removeProperty('color');
-}, { once: true });
-
 class dayWeatherData
 {
     constructor(temp, humidity, pressure, description)
@@ -53,23 +35,28 @@ async function separateData(weatherData)
     weatherData = await weatherData;
     const daysSeparated = [];
     let currentObject;
-    for (let i = 0, j = 0; i < 5; i++)
+    for (let day = 0, data = 0; day < 5; day++)
     {
-        daysSeparated[i] = [];
-        for (let k = 0; k <= 21; k += 3)
+        daysSeparated[day] = [];
+        for (let hour = 0; hour <= 21; hour += 3)
         {
-            currentObject = weatherData.list[j];
-            if (+(currentObject.dt_txt.slice(11, 13)) == k)
+            currentObject = weatherData.list[data];
+            if (+(currentObject.dt_txt.slice(11, 13)) == hour)
             {
-                daysSeparated[i].push(new dayWeatherData(currentObject.main.temp, currentObject.main.humidity, currentObject.main.pressure, currentObject.weather[0].description));
-                j++;
+                daysSeparated[day].push(new dayWeatherData(
+                    currentObject.main.temp,
+                    currentObject.main.humidity,
+                    currentObject.main.pressure,
+                    currentObject.weather[0].description,
+                ));
+                data++;
             }
             else
             {
-                daysSeparated[i].push(null);
+                daysSeparated[day].push(null);
             }
         }
-        daysSeparated[i].push(weatherData.list[j - 1].dt_txt.slice(0, 10));
+        daysSeparated[day].push(weatherData.list[data - 1].dt_txt.slice(0, 10));
     }
     return daysSeparated;
 }
@@ -77,7 +64,7 @@ async function separateData(weatherData)
 async function generateData(daysSeparated)
 {
     daysSeparated = await daysSeparated;
-    const tables = Array.from(document.querySelector('.weather-tables').querySelectorAll('table'));
+    const tables = document.querySelector('.weather-tables').querySelectorAll('table');
     let unitSymbol;
     if (units === 'metric')
     {
@@ -94,10 +81,9 @@ async function generateData(daysSeparated)
     for (let i = 0; i < 5; i++)
     {
         const table = tables[i];
-        let rows = Array.from(table.querySelectorAll('tr'));
+        const rows = Array.from(table.querySelectorAll('tr')).slice(1, 9);
         const day = daysSeparated[i];
         table.closest('.date-table-container').querySelector('.date-header').textContent = day[8];
-        rows = rows.slice(1, 9);
 
         for (let j = 0; j < 8; j++)
         {
@@ -113,13 +99,31 @@ async function generateData(daysSeparated)
             }
             else
             {
-                fileds[0].textContent = '-';
-                fileds[1].textContent = '-';
-                fileds[2].textContent = '-';
-                fileds[3].textContent = '-';
+                for (let k = 0; k < 4; k++)
+                {
+                    fileds[k].textContent = '-';
+                }
             }
         }
     }
 }
+
+let location = 'London';
+let units = 'metric';
+
+document.querySelector('.submit-button-weather').addEventListener('click', () =>
+{
+    location = document.querySelector('#location').value;
+    units = document.querySelector('#unit').value;
+
+    generateData(separateData(getWeatherData(location, units)));
+});
+
+document.querySelector('.location-input').addEventListener('click', () =>
+{
+    const input = document.querySelector('.location-input');
+    input.value = '';
+    input.style.removeProperty('color');
+}, { once: true });
 
 generateData(separateData(getWeatherData(location, units)));

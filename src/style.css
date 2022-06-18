@@ -1,3 +1,5 @@
+/* main section */
+
 @font-face {
     font-family: Quicksand;
     src: url(../fonts/Quicksand/Quicksand-VariableFont_wght.ttf);
@@ -21,6 +23,80 @@ body {
     gap: 40px;
 }
 
+    /* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+    /* Track */
+::-webkit-scrollbar-track {
+    background: #333333;
+}
+
+    /* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgb(96, 96, 96);
+}
+
+    /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(112, 112, 112);
+}
+
+/* User input section */
+
+.user-input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.input > label {
+    font-size: 40px;
+}
+
+.location-input, .unit-select {
+    text-align: center;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    background-color: #4f4f4f;
+}
+
+.location-input {
+    font-size: 27px;
+    height: 50px;
+    width: 270px;
+    padding: 10px;
+}
+
+.unit-select {
+    height: 40px;
+    width: 150px;
+    font-size: 20px;
+}
+
+.submit-button-weather {
+    width: 90px;
+    height: 40px;
+    background-color: #4f4f4f;
+    border: none;
+    border-radius: 20px;
+}
+
+
+/* Weather-data tables section*/
 
 .weather-tables {
     display: flex;
@@ -75,72 +151,4 @@ body {
     padding-right: 15px;
 }
 
-.user-input {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    transition: 0.3s;
-}
 
-.input {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.input > label {
-    font-size: 40px;
-}
-
-.location-input, .unit-select {
-    text-align: center;
-    border-radius: 30px;
-    outline: none;
-    border: none;
-    background-color: #4f4f4f;
-}
-
-.location-input {
-    font-size: 27px;
-    height: 50px;
-    width: 270px;
-    padding: 10px;
-}
-
-.unit-select {
-    height: 40px;
-    width: 110px;
-    font-size: 20px;
-}
-
-.submit-button-weather {
-    width: 90px;
-    height: 40px;
-    background-color: #4f4f4f;
-    border: none;
-    border-radius: 20px;
-}
-
-/* width */
-::-webkit-scrollbar {
-    width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #333333;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(96, 96, 96);
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgb(112, 112, 112);
-  }
