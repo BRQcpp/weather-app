@@ -1,13 +1,15 @@
+/* eslint-disable prefer-destructuring */
 import './style.css';
 
 class dayWeatherData
 {
-    constructor(temp, humidity, pressure, description)
+    constructor(temp, humidity, pressure, description, windSpeed)
     {
         this.temp = temp;
         this.humidity = humidity;
         this.pressure = pressure;
         this.description = description;
+        this.windSpeed = windSpeed;
     }
 }
 
@@ -48,6 +50,7 @@ async function separateData(weatherData)
                     currentObject.main.humidity,
                     currentObject.main.pressure,
                     currentObject.weather[0].description,
+                    currentObject.wind.speed,
                 ));
                 data++;
             }
@@ -65,19 +68,27 @@ async function generateData(daysSeparated)
 {
     daysSeparated = await daysSeparated;
     const tables = document.querySelector('.weather-tables').querySelectorAll('table');
-    let unitSymbol;
-    if (units === 'metric')
+    let unitSymbolTemp;
+    let unitSymbolWS;
+    switch (units)
     {
-        unitSymbol = '°C';
+        case 'metric':
+            {
+                unitSymbolTemp = '°C';
+                unitSymbolWS = 'm/s';
+            } break;
+        case 'standard':
+            {
+                unitSymbolTemp = 'K';
+                unitSymbolWS = 'm/s';
+            } break;
+        case 'imperial':
+            {
+                unitSymbolTemp = '°F';
+                unitSymbolWS = 'm/h';
+            } break;
     }
-    else if (units === 'standard')
-    {
-        unitSymbol = 'K';
-    }
-    else
-    {
-        unitSymbol = '°F';
-    }
+
     for (let i = 0; i < 5; i++)
     {
         const table = tables[i];
@@ -88,14 +99,15 @@ async function generateData(daysSeparated)
         for (let j = 0; j < 8; j++)
         {
             const row = rows[j];
-            const fileds = Array.from(row.querySelectorAll('td')).slice(1, 5);
+            const fileds = Array.from(row.querySelectorAll('td')).slice(1, 6);
 
             if (day[j] != null)
             {
                 fileds[0].textContent = day[j].description;
-                fileds[1].textContent = `${day[j].temp} ${unitSymbol}`;
+                fileds[1].textContent = `${day[j].temp} ${unitSymbolTemp}`;
                 fileds[2].textContent = `${day[j].humidity}%`;
                 fileds[3].textContent = `${day[j].pressure} hPa`;
+                fileds[4].textContent = `${day[j].windSpeed} ${unitSymbolWS}`;
             }
             else
             {
@@ -105,6 +117,40 @@ async function generateData(daysSeparated)
                 }
             }
         }
+    }
+}
+
+function slideTable(slideTo)
+{
+    const slider = document.querySelector(`.side-nav-arrow.${slideTo}`);
+    const currentlyDisplayed = document.querySelector('.currently-displayed');
+    if (!(slider.classList.contains('disabled')))
+    {
+        let id = parseInt(currentlyDisplayed.getAttribute('data-id'), 10);
+        id = slideTo === 'left' ? id - 1 : id + 1;
+        currentlyDisplayed.classList.remove('currently-displayed');
+        document.querySelector('.currently-displayed').classList.remove('currently-displayed');
+        document.querySelector(`[data-id='${id}']`).classList.add('currently-displayed');
+        document.querySelector(`[data-idnav='${id}']`).classList.add('currently-displayed');
+        setSlideAccessability(id);
+    }
+}
+
+function setSlideAccessability(id)
+{
+    if (document.querySelector('.not-accessible') != null)
+    {
+        document.querySelector('.not-accessible').classList.remove('not-accessible');
+    }
+    if (+id === 0)
+    {
+        const nav = document.querySelector('.side-nav-arrow.left');
+        nav.classList.add('not-accessible');
+    }
+    else if (+id === 4)
+    {
+        const nav = document.querySelector('.side-nav-arrow.right');
+        nav.classList.add('not-accessible');
     }
 }
 
@@ -119,6 +165,19 @@ document.querySelector('.submit-button-weather').addEventListener('click', () =>
     generateData(separateData(getWeatherData(location, units)));
 });
 
+document.querySelector('.submit-button-weather').addEventListener('click', () =>
+{
+    const topSection = document.querySelector('.top-section');
+    const bottomSection = document.querySelector('.bottom-section');
+    if (document.querySelector('.location-input').value !== '')
+    {
+        bottomSection.style.removeProperty('transform');
+        bottomSection.classList.add('roll-up');
+        bottomSection.classList.add('roll-up');
+        topSection.classList.add('roll-up');
+    }
+});
+
 document.querySelector('.location-input').addEventListener('click', () =>
 {
     const input = document.querySelector('.location-input');
@@ -126,4 +185,58 @@ document.querySelector('.location-input').addEventListener('click', () =>
     input.style.removeProperty('color');
 }, { once: true });
 
+document.querySelector('.side-nav-arrow.left').addEventListener('click', () =>
+{
+    slideTable('left');
+});
+
+document.querySelector('.side-nav-arrow.right').addEventListener('click', () =>
+{
+    slideTable('right');
+});
+
+document.querySelectorAll('.table-bottom-nav').forEach((nav) =>
+{
+    nav.addEventListener('click', () =>
+    {
+        const id = nav.getAttribute('data-idnav');
+        document.querySelectorAll('.currently-displayed').forEach((element) =>
+        {
+            element.classList.remove('currently-displayed');
+        });
+        document.querySelector(`[data-id='${id}']`).classList.add('currently-displayed');
+        nav.classList.add('currently-displayed');
+        setSlideAccessability(id);
+    });
+});
+
+document.querySelectorAll('.weather-data-checkbox').forEach((checkbox) =>
+{
+    checkbox.addEventListener('change', () =>
+    {
+        let display;
+        if (checkbox.checked === false)
+        {
+            display = 'none';
+            checkbox.removeAttribute('checked');
+        }
+        else
+        {
+            display = 'table-cell';
+            checkbox.setAttribute('checked', '');
+        }
+        const value = checkbox.value;
+        document.querySelectorAll(`[data-td='${value}']`).forEach((td) =>
+        {
+            td.style.setProperty('display', display);
+        });
+    });
+});
+
+document.querySelectorAll('[data-td="5"]').forEach((td) =>
+{
+    td.style.setProperty('display', 'none');
+});
+
 generateData(separateData(getWeatherData(location, units)));
+setSlideAccessability(0);

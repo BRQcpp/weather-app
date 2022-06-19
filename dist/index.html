@@ -8,403 +8,499 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-    <div class="user-input">
-        <div class="input">
-            <label for="location">City</label>    
-            <input type="text" id="location" class="location-input" value="London" style="color: gray   ;">
+    <div class="top-section">
+
+        <div class="user-input">
+            <div class="group-input">
+                <div class="input">
+                    <label for="location">City</label>    
+                    <input type="text" id="location" class="location-input" value="London" style="color: gray;">
+                </div>
+                <div class="input">
+                    <label for="unit">Units</label>    
+                    <select name="unit" id="unit" class="unit-select">
+                        <option value="metric">°C & meters/s</option>
+                        <option value="standard">K & meters/s</option>
+                        <option value="imperial">°F & miles/h</option>
+                    </select>
+                </div>
+
+                <button type="button" class="submit-button-weather">Get weather</button>
+            </div>
+
+            <div class="group-input">
+                <div class="checkbox-input">
+                    <div class="caption">Data to display</div>
+                    <div class="checkboxes">
+                        <div class="checkbox">
+                            <input id="data-chbx-0" class="weather-data-checkbox" type="checkbox" name="displayed-data" value="2" checked> 
+                            <label for="data-chbx-0" class="label">Temperature</label>
+                        </div>
+                        <div class="checkbox">
+                            <input id="data-chbx-1" class="weather-data-checkbox" type="checkbox" name="displayed-data" value="3" checked>  
+                            <label for="data-chbx-1" class="label">Humidity</label>
+                        </div>
+                        <div class="checkbox">
+                            <input id="data-chbx-2" class="weather-data-checkbox" type="checkbox" name="displayed-data" value="4" checked> 
+                            <label for="data-chbx-2" class="label">Pressure</label>
+                        </div>
+                        <div class="checkbox">
+                            <input id="data-chbx-3" class="weather-data-checkbox" type="checkbox" name="displayed-data" value="5">
+                            <label for="data-chbx-3" class="label">Wind speed</label>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="input">
-            <label for="unit">Temperature unit</label>    
-            <select name="unit" id="unit" class="unit-select">
-                <option value="metric">metric - °C</option>
-                <option value="standard">standard - K</option>
-                <option value="imperial">imperial - °F</option>
-            </select>
-        </div>
-        <button type="button" class="submit-button-weather">Get weather</button>
     </div>
-    <div class="weather-tables" >
-        <div class="date-table-container">
-            <table>
-                <div class="date-header"></div>
-                <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Temperature</th>
-                    <th scope="col">Humidity</th>
-                    <th scope="col">Pressure</th>
-                </tr>
-                <tr> 
-                    <td>00:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>03:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>06:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>09:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>12:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>15:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>18:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>21:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
-        <div class="date-table-container">
-            <table>
-                <div class="date-header"></div>
-                <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Temperature</th>
-                    <th scope="col">Humidity</th>
-                    <th scope="col">Pressure</th>
-                </tr>
-                <tr> 
-                    <td>00:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>03:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>06:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>09:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>12:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>15:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>18:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>21:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
-        <div class="date-table-container">
-            <table>
-                <div class="date-header"></div>
-                <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Temperature</th>
-                    <th scope="col">Humidity</th>
-                    <th scope="col">Pressure</th>
-                </tr>
-                <tr> 
-                    <td>00:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>03:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>06:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>09:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>12:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>15:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>18:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>21:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
-        <div class="date-table-container">
-            <table>
-                <div class="date-header"></div>
-                <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Temperature</th>
-                    <th scope="col">Humidity</th>
-                    <th scope="col">Pressure</th>
-                </tr>
-                <tr> 
-                    <td>00:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>03:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>06:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>09:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>12:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>15:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>18:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>21:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
-        <div class="date-table-container">
-            <table>
-                <div class="date-header"></div>
-                <tr>
-                    <th scope="col">Time</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Temperature</th>
-                    <th scope="col">Humidity</th>
-                    <th scope="col">Pressure</th>
-                </tr>
-                <tr> 
-                    <td>00:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>03:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>06:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>09:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>12:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>15:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>18:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr> 
-                    <td>21:00</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </div>
+    <div class="bottom-section">
+        <div class="weather-tables">
+            <div class="tables-with-side-nav">
+                <button class="side-nav">
+                    <img class="side-nav-arrow left" src="../graphics/left-arrow.png" alt="image of an arrow pointing left">
+                </button>
+                <div class="tables">
+                    <div class="date-table-container currently-displayed" data-id="0">
+                        <table>
+                            <div class="date-header"></div>
+                            <tr>
+                                <th scope="col" data-td="0">Time</th>
+                                <th scope="col" data-td="1">Description</th>
+                                <th scope="col" data-td="2">Temperature</th>
+                                <th scope="col" data-td="3">Humidity</th>
+                                <th scope="col" data-td="4">Pressure</th>
+                                <th scope="col" data-td="5">Wind speed</th>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">00:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">03:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">06:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">09:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">12:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">15:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">18:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">21:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="date-table-container" data-id="1">
+                        <table>
+                            <div class="date-header"></div>
+                            <tr>
+                                <th scope="col" data-td="0">Time</th>
+                                <th scope="col" data-td="1">Description</th>
+                                <th scope="col" data-td="2">Temperature</th>
+                                <th scope="col" data-td="3">Humidity</th>
+                                <th scope="col" data-td="4">Pressure</th>
+                                <th scope="col" data-td="5">Wind speed</th>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">00:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">03:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">06:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">09:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">12:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">15:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">18:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">21:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="date-table-container" data-id="2">
+                        <table>
+                            <div class="date-header"></div>
+                            <tr>
+                                <th scope="col" data-td="0">Time</th>
+                                <th scope="col" data-td="1">Description</th>
+                                <th scope="col" data-td="2">Temperature</th>
+                                <th scope="col" data-td="3">Humidity</th>
+                                <th scope="col" data-td="4">Pressure</th>
+                                <th scope="col" data-td="5">Wind speed</th>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">00:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">03:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">06:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">09:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">12:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">15:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">18:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">21:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="date-table-container" data-id="3">
+                        <table>
+                            <div class="date-header"></div>
+                            <tr>
+                                <th scope="col" data-td="0">Time</th>
+                                <th scope="col" data-td="1">Description</th>
+                                <th scope="col" data-td="2">Temperature</th>
+                                <th scope="col" data-td="3">Humidity</th>
+                                <th scope="col" data-td="4">Pressure</th>
+                                <th scope="col" data-td="5">Wind speed</th>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">00:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">03:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">06:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">09:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">12:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">15:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">18:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">21:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="date-table-container" data-id="4">
+                        <table>
+                            <div class="date-header"></div>
+                            <tr>
+                                <th scope="col" data-td="0">Time</th>
+                                <th scope="col" data-td="1">Description</th>
+                                <th scope="col" data-td="2">Temperature</th>
+                                <th scope="col" data-td="3">Humidity</th>
+                                <th scope="col" data-td="4">Pressure</th>
+                                <th scope="col" data-td="5">Wind speed</th>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">00:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">03:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">06:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">09:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">12:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">15:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">18:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                            <tr> 
+                                <td data-td="0">21:00</td>
+                                <td data-td="1"></td>
+                                <td data-td="2"></td>
+                                <td data-td="3"></td>
+                                <td data-td="4"></td>
+                                <td data-td="5"></td>
+                                <td data-td="6"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <button class="side-nav">
+                    <img class="side-nav-arrow right" src="../graphics/right-arrow.png" alt="image of an arrow pointing right">
+                </button>
+            </div>
         
-    </div> 
+        <div class="tables-bottom-nav">
+            <div class="table-bottom-nav currently-displayed" data-idnav="0"></div>
+            <div class="table-bottom-nav" data-idnav="1"></div>
+            <div class="table-bottom-nav" data-idnav="2"></div>
+            <div class="table-bottom-nav" data-idnav="3"></div>
+            <div class="table-bottom-nav" data-idnav="4"></div>
+        </div>
+    </div>
+     
 </body>
 </html>

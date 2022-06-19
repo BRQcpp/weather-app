@@ -12,7 +12,7 @@
 
 body {
     font-family: Quicksand;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -43,16 +43,38 @@ body {
     background: rgb(112, 112, 112);
 }
 
+button {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+}
+
+
 /* User input section */
 
 .user-input {
     display: flex;
-    flex-direction: column;
     gap: 20px;
     align-items: center;
     justify-content: center;
     width: 100%;
     transition: 0.3s;
+    flex-wrap: wrap;
+}
+
+.group-input {
+    width: 284px;
+    height: 269px;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background-color: #1f1f1f;
 }
 
 .input {
@@ -63,7 +85,7 @@ body {
 }
 
 .input > label {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .location-input, .unit-select {
@@ -75,15 +97,68 @@ body {
 }
 
 .location-input {
-    font-size: 27px;
-    height: 50px;
-    width: 270px;
+    font-size: 23px;
+    height: 35px;
+    width: 240px;
     padding: 10px;
 }
 
 .unit-select {
-    height: 40px;
-    width: 150px;
+    height: 30px;
+    width: 180px;
+    font-size: 18px;
+}
+
+.checkbox-input {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.checkbox-input > .caption {
+    font-size: 30px;
+}
+
+.checkboxes {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.weather-data-checkbox {
+    appearance: none;
+    -webkit-animation: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #4e4879;
+    transition: 0.3s;
+}
+
+.weather-data-checkbox[checked]::before {
+    position: relative;
+    left: 25%;
+    content: '🗸';
+}
+
+.weather-data-checkbox[checked] {
+    background-color: #262a58;
+}
+
+.weather-data-checkbox:hover {
+    opacity: 0.3;
+    background-color: #262a58;
+}
+
+.checkbox > .label{
     font-size: 20px;
 }
 
@@ -93,25 +168,115 @@ body {
     background-color: #4f4f4f;
     border: none;
     border-radius: 20px;
+    transition: 0.3s;
+}
+
+.submit-button-weather:hover {
+    transform: scale(0.95);
 }
 
 
 /* Weather-data tables section*/
 
+.top-section {
+    transition: 0.3s;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+   /* transform: translateY(50%); */
+}
+
+.bottom-section {
+    transition: 0.3s;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+
+   /* transform: translateY(500px); */
+}
+
 .weather-tables {
     display: flex;
-    width: 100%;
+    flex-direction: column;
     height: fit-content;    
-    overflow-x: auto;
+    margin: 0 auto;
+    gap: 8px;
+}
+
+.tables {
+    overflow: hidden;
+    display: flex;
+    height: fit-content;    
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.tables-with-side-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.side-nav {
+    width: 70px;
+}
+
+.side-nav-arrow {
+    transition: 0.4s;
+}
+
+.side-nav-arrow:hover {
+    transform: scale(0.93);
+}
+
+.not-accessible {
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.tables-bottom-nav {
+    margin: 0 auto;
+    display: flex;
+    height: 30px;
+    width: 320px;
+    justify-content: space-around;
+}
+
+.table-bottom-nav {
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.table-bottom-nav:hover {
+    background-color: #2b2d42;
+    transform: scale(0.95);
+}
+
+.table-bottom-nav.currently-displayed {
+    background-color: rgb(38 42 88);
+}
+
+.roll-up {
+    transform: translateY(0px);
 }
 
 .date-table-container {
-    display: flex;
+    display: none;
     flex-shrink: 0;
     height: 430px;
-    width: 460px;
     flex-direction: column;
     color: white;
+}
+
+.date-table-container.currently-displayed {
+    display: flex !important;
 }
 
 .date-table-container > table {
@@ -139,8 +304,12 @@ body {
 }
 
 .date-table-container > table > tbody > tr > td {
-    padding: 0;
+    padding: 0 5px;
     text-align: center;
+}
+
+.date-table-container > table > tbody > tr > th {
+    padding: 5px;
 }
 
 .date-table-container > table > tbody > tr > td:first-child {
@@ -150,5 +319,4 @@ body {
 .date-table-container > table > tbody > tr > td:last-child {
     padding-right: 15px;
 }
-
 
