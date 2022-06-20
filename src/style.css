@@ -10,6 +10,10 @@
     font-family: inherit;
 }
 
+html {
+    min-width: 100%;
+}
+
 body {
     font-family: Quicksand;
     min-height: 100vh;
@@ -50,6 +54,32 @@ button {
     border: none;
 }
 
+.loading-screen {
+    background-color: #1f1f1fcc;    
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+    gap: 10px;
+    top: 0;
+}
+
+.loading-gif {
+    height: 70px;
+}
+
+.loading-text {
+    font-size: 80px;
+    text-align: center;
+}
+
+.blocked {
+    display: none !important;
+}
 
 /* User input section */
 
@@ -103,6 +133,14 @@ button {
     padding: 10px;
 }
 
+.location-input::placeholder {
+    color: red;
+}
+
+.location-input.wrong-input {
+    border: 1px solid red;
+}
+
 .unit-select {
     height: 30px;
     width: 180px;
@@ -140,7 +178,7 @@ button {
     border-radius: 50%;
     background-color: white;
     border: 2px solid #4e4879;
-    transition: 0.3s;
+    transition: 0.5s;
 }
 
 .weather-data-checkbox[checked]::before {
@@ -173,28 +211,28 @@ button {
 
 .submit-button-weather:hover {
     transform: scale(0.95);
+    border: 1px solid black;
 }
 
 
 /* Weather-data tables section*/
 
-.top-section {
+.top-section, .bottom-section {
     transition: 0.3s;
-    position: relative;
     width: 100%;
     display: flex;
     align-items: center;
-   /* transform: translateY(50%); */
 }
 
 .bottom-section {
-    transition: 0.3s;
-    width: 100%;
-    display: flex;
+    flex-direction: column;
+    gap: 10px;
     align-items: center;
-    overflow: auto;
+    overflow-y: hidden;
+}
 
-   /* transform: translateY(500px); */
+.location-data {
+    margin: auto;
 }
 
 .weather-tables {
@@ -277,6 +315,22 @@ button {
 
 .date-table-container.currently-displayed {
     display: flex !important;
+}
+
+.table-placeholder {
+    background-color: rgb(38 42 88);
+    height: 430px;
+    width: 430px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placeholder-text {
+    text-align: center;
+    font-size: 22px;
+    padding: 10px;
 }
 
 .date-table-container > table {

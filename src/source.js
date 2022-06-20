@@ -1,3 +1,4 @@
+/* eslint-disable dot-notation */
 /* eslint-disable prefer-destructuring */
 import './style.css';
 
@@ -19,16 +20,14 @@ async function getWeatherData(location, units)
 
     if (weatherData.ok === false)
     {
-        if (weatherData.status === 404)
-        {
-            alert('City was not found');
-        }
         return false;
     }
     weatherData = await weatherData.json();
-
-    weatherData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&units=metric&appid=7532cb4e49752099509e49e9180a8b49`);
+    let time = await fetch(`https://api.ipgeolocation.io/timezone?apiKey=1d2dafb861f34d198eec33f885b8ce9f&lat=${weatherData.coord.lat}&long=${weatherData.coord.lon}`);
+    weatherData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&units=${units}&appid=7532cb4e49752099509e49e9180a8b49`);
     weatherData = await weatherData.json();
+    time = await time.json();
+    weatherData['date_time_txt'] = time.date_time_txt;
     return weatherData;
 }
 
@@ -64,7 +63,7 @@ async function separateData(weatherData)
     return daysSeparated;
 }
 
-async function generateData(daysSeparated)
+async function generateData(daysSeparated, units)
 {
     daysSeparated = await daysSeparated;
     const tables = document.querySelector('.weather-tables').querySelectorAll('table');
@@ -154,36 +153,76 @@ function setSlideAccessability(id)
     }
 }
 
-let location = 'London';
+async function getTimeAndGenerate(lat, long, location)
+{
+    let time = await fetch(`https://api.ipgeolocation.io/timezone?apiKey=1d2dafb861f34d198eec33f885b8ce9f&lat=${lat}&long=${long}`);
+    time = await time.json();
+    document.querySelector('.location-data').textContent = `${location} -  ${time.timezone}, ${time.date_time}`;
+}
+
 let units = 'metric';
 
-document.querySelector('.submit-button-weather').addEventListener('click', () =>
+async function sumDataAndGenerate()
 {
-    location = document.querySelector('#location').value;
-    units = document.querySelector('#unit').value;
-
-    generateData(separateData(getWeatherData(location, units)));
-});
-
-document.querySelector('.submit-button-weather').addEventListener('click', () =>
-{
-    const topSection = document.querySelector('.top-section');
-    const bottomSection = document.querySelector('.bottom-section');
-    if (document.querySelector('.location-input').value !== '')
+    const location = document.querySelector('#location').value;
+    if (location == '')
     {
-        bottomSection.style.removeProperty('transform');
-        bottomSection.classList.add('roll-up');
-        bottomSection.classList.add('roll-up');
-        topSection.classList.add('roll-up');
+        setInputWrong(document.querySelector('.location-input'), 'Required');
     }
-});
+    else
+    {
+        units = document.querySelector('#unit').value;
+        document.querySelector('.loading-screen').style.setProperty('display', 'flex');
+        const data = await getWeatherData(location, units);
+        if (data !== false)
+        {
+            const dataSeparated = await separateData(data);
 
+            await getTimeAndGenerate(data.city.coord.lat, data.city.coord.lon, location);
+            await generateData(dataSeparated, units);
+            if (document.querySelector('.blocked') !== null)
+            {
+                document.querySelectorAll('.blocked').forEach((item) =>
+                {
+                    item.classList.remove('blocked');
+                });
+                document.querySelector('.table-placeholder').style.setProperty('display', 'none');
+                document.querySelectorAll('.not-accessible').forEach((item) =>
+                {
+                    item.classList.remove('not-accessible');
+                });
+                setSlideAccessability(0);
+            }
+        }
+        else
+        {
+            setInputWrong(document.querySelector('.location-input'), 'City not found!');
+        }
+    }
+
+    document.querySelector('.loading-screen').style.setProperty('display', 'none');
+}
+
+function setInputWrong(input, message)
+{
+    input.value = '';
+    input.placeholder = message;
+    input.classList.add('wrong-input');
+}
+
+document.querySelector('.submit-button-weather').addEventListener('click', () =>
+{
+    sumDataAndGenerate();
+});
 document.querySelector('.location-input').addEventListener('click', () =>
 {
     const input = document.querySelector('.location-input');
-    input.value = '';
-    input.style.removeProperty('color');
-}, { once: true });
+    if (input.classList.contains('wrong-input'))
+    {
+        input.placeholder = '';
+        input.classList.remove('wrong-input');
+    }
+});
 
 document.querySelector('.side-nav-arrow.left').addEventListener('click', () =>
 {
@@ -238,5 +277,10 @@ document.querySelectorAll('[data-td="5"]').forEach((td) =>
     td.style.setProperty('display', 'none');
 });
 
-generateData(separateData(getWeatherData(location, units)));
-setSlideAccessability(0);
+const windowHeight = Math.max(
+    document.querySelector('body').scrollHeight,
+    document.querySelector('body').offsetHeight,
+    document.querySelector('html').clientHeight,
+    document.querySelector('html').scrollHeight,
+    document.querySelector('html').offsetHeight,
+);
