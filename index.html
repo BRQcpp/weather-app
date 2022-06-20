@@ -8,13 +8,17 @@
     <script src="main.js" defer></script>
 </head>
 <body>
+    <div class="loading-screen" style="display: none">
+        <div class="loading-text">Loading data</div>
+        <img class="loading-gif" src="../graphics/loading.gif" alt="loading gif">
+    </div>
     <div class="top-section">
 
         <div class="user-input">
             <div class="group-input">
                 <div class="input">
                     <label for="location">City</label>    
-                    <input type="text" id="location" class="location-input" value="London" style="color: gray;">
+                    <input type="text" id="location" class="location-input">
                 </div>
                 <div class="input">
                     <label for="unit">Units</label>    
@@ -57,14 +61,21 @@
     </div>
     <div class="bottom-section">
         <div class="weather-tables">
+            <div class="location-data"></div>
             <div class="tables-with-side-nav">
-                <button class="side-nav">
+                <button class="side-nav not-accessible">
                     <img class="side-nav-arrow left" src="../graphics/left-arrow.png" alt="image of an arrow pointing left">
                 </button>
                 <div class="tables">
+
                     <div class="date-table-container currently-displayed" data-id="0">
-                        <table>
-                            <div class="date-header"></div>
+                        <div class="table-placeholder">
+                            <div class="placeholder-text">
+                                 Input city and press 'Get weather' to get weather data for 5 days
+                             </div> 
+                         </div>
+                        <table class="blocked">
+                            <div class="date-header blocked "></div>
                             <tr>
                                 <th scope="col" data-td="0">Time</th>
                                 <th scope="col" data-td="1">Description</th>
@@ -488,12 +499,12 @@
                         </table>
                     </div>
                 </div>
-                <button class="side-nav">
+                <button class="side-nav not-accessible">
                     <img class="side-nav-arrow right" src="../graphics/right-arrow.png" alt="image of an arrow pointing right">
                 </button>
             </div>
         
-        <div class="tables-bottom-nav">
+        <div class="tables-bottom-nav not-accessible">
             <div class="table-bottom-nav currently-displayed" data-idnav="0"></div>
             <div class="table-bottom-nav" data-idnav="1"></div>
             <div class="table-bottom-nav" data-idnav="2"></div>
