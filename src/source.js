@@ -1,5 +1,3 @@
-/* eslint-disable dot-notation */
-/* eslint-disable prefer-destructuring */
 import './style.css';
 
 class dayWeatherData
@@ -27,7 +25,7 @@ async function getWeatherData(location, units)
     weatherData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${weatherData.coord.lat}&lon=${weatherData.coord.lon}&units=${units}&appid=7532cb4e49752099509e49e9180a8b49`);
     weatherData = await weatherData.json();
     time = await time.json();
-    weatherData['date_time_txt'] = time.date_time_txt;
+    weatherData.date_time_txt = time.date_time_txt;
     return weatherData;
 }
 
@@ -264,7 +262,7 @@ document.querySelectorAll('.weather-data-checkbox').forEach((checkbox) =>
             display = 'table-cell';
             checkbox.setAttribute('checked', '');
         }
-        const value = checkbox.value;
+        const { value } = checkbox;
         document.querySelectorAll(`[data-td='${value}']`).forEach((td) =>
         {
             td.style.setProperty('display', display);
@@ -276,11 +274,3 @@ document.querySelectorAll('[data-td="5"]').forEach((td) =>
 {
     td.style.setProperty('display', 'none');
 });
-
-const windowHeight = Math.max(
-    document.querySelector('body').scrollHeight,
-    document.querySelector('body').offsetHeight,
-    document.querySelector('html').clientHeight,
-    document.querySelector('html').scrollHeight,
-    document.querySelector('html').offsetHeight,
-);
