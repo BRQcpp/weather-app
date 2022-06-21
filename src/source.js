@@ -61,30 +61,11 @@ async function separateData(weatherData)
     return daysSeparated;
 }
 
-async function generateData(daysSeparated, units)
+async function generateData(daysSeparated, unitSystem)
 {
     daysSeparated = await daysSeparated;
     const tables = document.querySelector('.weather-tables').querySelectorAll('table');
-    let unitSymbolTemp;
-    let unitSymbolWS;
-    switch (units)
-    {
-        case 'metric':
-            {
-                unitSymbolTemp = '°C';
-                unitSymbolWS = 'm/s';
-            } break;
-        case 'standard':
-            {
-                unitSymbolTemp = 'K';
-                unitSymbolWS = 'm/s';
-            } break;
-        case 'imperial':
-            {
-                unitSymbolTemp = '°F';
-                unitSymbolWS = 'm/h';
-            } break;
-    }
+    const units = getUnits(unitSystem);
 
     for (let i = 0; i < 5; i++)
     {
@@ -101,10 +82,10 @@ async function generateData(daysSeparated, units)
             if (day[j] != null)
             {
                 fileds[0].textContent = day[j].description;
-                fileds[1].textContent = `${day[j].temp} ${unitSymbolTemp}`;
+                fileds[1].textContent = `${day[j].temp} ${units.temp}`;
                 fileds[2].textContent = `${day[j].humidity}%`;
                 fileds[3].textContent = `${day[j].pressure} hPa`;
-                fileds[4].textContent = `${day[j].windSpeed} ${unitSymbolWS}`;
+                fileds[4].textContent = `${day[j].windSpeed} ${units.windSpeed}`;
             }
             else
             {
@@ -113,6 +94,34 @@ async function generateData(daysSeparated, units)
                     fileds[k].textContent = '-';
                 }
             }
+        }
+    }
+}
+
+function getUnits(unitSystem)
+{
+    switch (unitSystem)
+    {
+        case 'metric':
+        {
+            return {
+                temp: '°C',
+                windSpeed: 'm/s',
+            };
+        }
+        case 'standard':
+        {
+            return {
+                temp: 'K',
+                windSpeed: 'm/s',
+            };
+        }
+        case 'imperial':
+        {
+            return {
+                temp: '°F',
+                windSpeed: 'm/s',
+            };
         }
     }
 }
